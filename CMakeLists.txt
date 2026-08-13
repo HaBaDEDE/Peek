@@ -23,7 +23,7 @@ add_executable(Peek WIN32
     resources/peek.rc
 )
 
-target_include_directories(Peek PRIVATE src)
+target_include_directories(Peek PRIVATE src resources)
 target_compile_definitions(Peek PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN NOMINMAX)
 
 if(MSVC)
