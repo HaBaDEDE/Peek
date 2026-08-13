@@ -68,7 +68,7 @@ def make_demo_gif() -> None:
     features = [
         ("peek-demo-ghost-hd.png", "Ghost", "What just flashed past?", "Ctrl + Shift + G"),
         ("peek-demo-unlock-hd.png", "Unlock", "Who is using this file?", "Drop a file or choose one"),
-        ("peek-demo-focus-hd.png", "Focus", "What Windows UI is under the pointer?", "Ctrl + Shift + F"),
+        ("peek-demo-focus-hd.png", "Focus", "What's under the pointer?", "Ctrl + Shift + F"),
     ]
     icon = load("peek-icon.png").resize((99, 99), Image.Resampling.LANCZOS)
     stills: list[Image.Image] = []
