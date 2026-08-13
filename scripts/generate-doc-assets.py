@@ -63,48 +63,49 @@ def make_overview() -> None:
 
 
 def make_demo_gif() -> None:
-    width, height = 960, 600
+    # Render at the user's 150% Windows scale so GitHub never enlarges UI text.
+    width, height = 1440, 900
     features = [
-        ("peek-demo-ghost.png", "Ghost", "What just flashed past?", "Ctrl + Shift + G"),
-        ("peek-demo-unlock.png", "Unlock", "Who is using this file?", "Drop a file or choose one"),
-        ("peek-demo-focus.png", "Focus", "What Windows UI is under the pointer?", "Ctrl + Shift + F"),
+        ("peek-demo-ghost-hd.png", "Ghost", "What just flashed past?", "Ctrl + Shift + G"),
+        ("peek-demo-unlock-hd.png", "Unlock", "Who is using this file?", "Drop a file or choose one"),
+        ("peek-demo-focus-hd.png", "Focus", "What Windows UI is under the pointer?", "Ctrl + Shift + F"),
     ]
-    icon = load("peek-icon.png").resize((66, 66), Image.Resampling.LANCZOS)
+    icon = load("peek-icon.png").resize((99, 99), Image.Resampling.LANCZOS)
     stills: list[Image.Image] = []
     for index, (screenshot_name, title, question, action) in enumerate(features):
         # Flat colors quantize cleanly in GIF and keep the real window legible.
         frame = Image.new("RGBA", (width, height), (18, 29, 47, 255))
         draw = ImageDraw.Draw(frame)
-        draw.rectangle((0, 0, 456, height), fill=(12, 22, 38, 255))
-        draw.rectangle((456, 0, 460, height), fill=(37, 99, 235, 255))
+        draw.rectangle((0, 0, 684, height), fill=(12, 22, 38, 255))
+        draw.rectangle((684, 0, 690, height), fill=(37, 99, 235, 255))
 
-        frame.alpha_composite(icon, (48, 42))
-        draw.text((130, 46), "Peek", font=font(43, True), fill=(248, 250, 252))
-        draw.text((48, 130), "Three answers. One tiny Windows tool.",
-                  font=font(18), fill=(157, 174, 199))
+        frame.alpha_composite(icon, (72, 63))
+        draw.text((195, 69), "Peek", font=font(65, True), fill=(248, 250, 252))
+        draw.text((72, 195), "Three answers. One tiny Windows tool.",
+                  font=font(27), fill=(157, 174, 199))
 
-        draw.text((48, 216), title, font=font(38, True), fill=(96, 165, 250))
-        draw.multiline_text((48, 273), question, font=font(25),
-                            fill=(232, 238, 247), spacing=7)
-        draw.rounded_rectangle((48, 372, 404, 428), radius=8,
+        draw.text((72, 324), title, font=font(57, True), fill=(96, 165, 250))
+        draw.multiline_text((72, 410), question, font=font(38),
+                            fill=(232, 238, 247), spacing=10)
+        draw.rounded_rectangle((72, 558, 606, 642), radius=12,
                                fill=(23, 39, 63), outline=(67, 91, 126), width=1)
-        draw.text((226, 400), action, font=font(19, True),
+        draw.text((339, 600), action, font=font(29, True),
                   fill=(248, 250, 252), anchor="mm")
 
-        tab_y = 484
+        tab_y = 726
         for tab_index, (_, tab_title, _, _) in enumerate(features):
-            tab_x = 48 + tab_index * 118
+            tab_x = 72 + tab_index * 177
             active = tab_index == index
             if active:
-                draw.rounded_rectangle((tab_x, tab_y, tab_x + 98, tab_y + 34),
-                                       radius=7, fill=(37, 99, 235))
-            draw.text((tab_x + 49, tab_y + 17), tab_title, font=font(15, active),
+                draw.rounded_rectangle((tab_x, tab_y, tab_x + 147, tab_y + 51),
+                                       radius=10, fill=(37, 99, 235))
+            draw.text((tab_x + 74, tab_y + 26), tab_title, font=font(23, active),
                       fill=(255, 255, 255) if active else (130, 148, 174), anchor="mm")
 
-        draw.text((48, 550), "Native Win32   |   Offline   |   Single EXE",
-                  font=font(16), fill=(130, 148, 174))
-        # Preserve the 423 x 571 capture at exactly 1:1 pixels for sharp UI text.
-        paste_window(frame, load(screenshot_name), (512, 14, 423, 571))
+        draw.text((72, 825), "Native Win32   |   Offline   |   Single EXE",
+                  font=font(24), fill=(130, 148, 174))
+        # Preserve the 634 x 857 physical-pixel capture at exactly 1:1.
+        paste_window(frame, load(screenshot_name), (768, 21, 634, 857))
         stills.append(frame.convert("RGB"))
 
     # Clean cuts keep every GIF frame readable, even when GitHub pauses a frame.

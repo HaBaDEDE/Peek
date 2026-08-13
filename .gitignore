@@ -6,3 +6,5 @@
 *.VC.db
 *.pdb
 *.log
+__pycache__/
+*.pyc
