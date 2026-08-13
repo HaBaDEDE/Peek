@@ -103,19 +103,23 @@ def make_demo_gif() -> None:
 
         draw.text((48, 550), "Native Win32   |   Offline   |   Single EXE",
                   font=font(16), fill=(130, 148, 174))
-        paste_window(frame, load(screenshot_name), (520, 28, 390, 526))
+        # Preserve the 423 x 571 capture at exactly 1:1 pixels for sharp UI text.
+        paste_window(frame, load(screenshot_name), (512, 14, 423, 571))
         stills.append(frame.convert("RGB"))
 
     # Clean cuts keep every GIF frame readable, even when GitHub pauses a frame.
     rgb_frames = stills
     durations = [1700, 1700, 1900]
 
-    # A shared palette prevents color flicker between frames.
-    palette_source = Image.new("RGB", (width, height * len(stills)))
-    for index, still in enumerate(stills):
-        palette_source.paste(still, (0, index * height))
-    palette = palette_source.quantize(colors=256, method=Image.Quantize.MEDIANCUT)
-    frames = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in rgb_frames]
+    # Give every frame all 256 GIF colors so ClearType and small labels retain detail.
+    frames = [
+        frame.quantize(
+            colors=256,
+            method=Image.Quantize.MEDIANCUT,
+            dither=Image.Dither.FLOYDSTEINBERG,
+        )
+        for frame in rgb_frames
+    ]
 
     frames[0].save(
         IMAGES / "peek-demo.gif",
