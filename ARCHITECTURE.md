@@ -52,7 +52,7 @@ Shared state uses short mutex sections. Shutdown sets stop events, cancels block
 - Icons are lazily loaded and bounded.
 - No automatic elevation and no debug privilege enablement.
 - Protected/elevated processes may expose partial information.
-- No file or registry persistence except optional future autostart/hotkey settings.
+- No captured process, file, window or UI Automation data is persisted. Only the selected UI language and close-button behavior are stored for the current Windows user.
 
 ## Official references
 

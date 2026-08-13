@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<img src="docs/images/peek-icon.png" width="112" height="112" alt="Peek icon">
+
 # Peek
 
 ### 三个问题，一个极小的 Windows 工具
@@ -10,8 +12,25 @@
 
 `原生 Win32`　`单文件 EXE`　`离线运行`　`无账户`　`无遥测`　`中英双语`
 
+[![Release](https://img.shields.io/github/v/release/HaBaDEDE/Peek?style=flat-square)](https://github.com/HaBaDEDE/Peek/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/HaBaDEDE/Peek/total?style=flat-square)](https://github.com/HaBaDEDE/Peek/releases)
+[![License: MIT](https://img.shields.io/github/license/HaBaDEDE/Peek?style=flat-square)](LICENSE)
+![Windows 10/11](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4?style=flat-square&logo=windows)
+
 [简体中文](#readme-zh) · [English](#readme-en)
 
+**[下载最新版本](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe) · [Download latest release](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe)**
+
+当前版本：`v0.1.0`
+
+</div>
+
+---
+
+![Peek: Ghost, Unlock and Focus](docs/images/peek-overview.png)
+
+<div align="center">
+<img src="docs/images/peek-demo.gif" width="800" alt="Peek feature demo">
 </div>
 
 ---
@@ -38,7 +57,13 @@ Peek 是一个轻量、快速的 Windows 系统观察工具。它不是任务管
 
 ## 下载和启动
 
-项目中的 [dist/Peek.exe](dist/Peek.exe) 是已经构建好的 Windows x64 程序。
+推荐从 [GitHub Releases](https://github.com/HaBaDEDE/Peek/releases/latest) 下载正式的 Windows x64 版本：
+
+**[直接下载 Peek.exe](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe)**
+
+校验文件：[SHA256SUMS.txt](https://github.com/HaBaDEDE/Peek/releases/latest/download/SHA256SUMS.txt)
+
+仓库中的 [dist/Peek.exe](dist/Peek.exe) 与当前源码版本对应，也可以直接下载运行。
 
 1. 下载 `Peek.exe`。
 2. 双击运行，不需要安装。
@@ -198,6 +223,10 @@ build/release/bin/Release/Peek.exe
 
 当前没有自动更新、网络功能、账户、插件系统、数据库、完整任务管理器、强制关闭 Handle 或大型日志系统。
 
+## 开源许可证
+
+Peek 使用 [MIT License](LICENSE) 发布。你可以使用、复制、修改和分发源码或程序，但需要保留许可证中的版权与许可声明。
+
 <div align="right"><a href="#top">返回顶部</a></div>
 
 ---
@@ -224,7 +253,13 @@ Peek is a small, fast Windows observation utility. It is not a task manager and 
 
 ## Download and start
 
-The prebuilt Windows x64 application is available at [dist/Peek.exe](dist/Peek.exe).
+Download the official Windows x64 build from [GitHub Releases](https://github.com/HaBaDEDE/Peek/releases/latest):
+
+**[Download Peek.exe](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe)**
+
+Checksum file: [SHA256SUMS.txt](https://github.com/HaBaDEDE/Peek/releases/latest/download/SHA256SUMS.txt)
+
+The repository copy at [dist/Peek.exe](dist/Peek.exe) also corresponds to the current source revision.
 
 1. Download `Peek.exe`.
 2. Run it directly; no installation is required.
@@ -350,5 +385,9 @@ See [TESTING.md](TESTING.md) for acceptance testing and [ARCHITECTURE.md](ARCHIT
 - Close-button behavior setting
 
 There is currently no updater, networking, account system, plug-in system, database, full task manager, force-close-handle feature, or large logging subsystem.
+
+## License
+
+Peek is released under the [MIT License](LICENSE). You may use, copy, modify, and distribute the source or application while retaining the copyright and permission notice from the license.
 
 <div align="right"><a href="#top">Back to top</a></div>

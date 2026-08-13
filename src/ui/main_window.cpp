@@ -1,6 +1,7 @@
 #include "ui/main_window.h"
 
 #include "core/privilege_helper.h"
+#include "resource.h"
 
 #include <commctrl.h>
 #include <commdlg.h>
@@ -103,7 +104,8 @@ bool MainWindow::Create(HINSTANCE instance, int show_command, std::wstring& erro
     wc.lpfnWndProc = WindowProc;
     wc.lpszClassName = L"Peek.MainWindow";
     wc.hCursor = LoadCursorW(nullptr, IDC_ARROW);
-    wc.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
+    wc.hIcon = LoadIconW(instance, MAKEINTRESOURCEW(IDI_PEEK));
+    wc.hIconSm = wc.hIcon;
     wc.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
     if (!RegisterClassExW(&wc) && GetLastError() != ERROR_CLASS_ALREADY_EXISTS) {
         error = Texts().main_class_error; return false;
@@ -422,7 +424,8 @@ void MainWindow::AddTrayIcon() {
     if (tray_added_ || !hwnd_) return;
     tray_.cbSize = sizeof(tray_); tray_.hWnd = hwnd_; tray_.uID = 1;
     tray_.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP | NIF_SHOWTIP;
-    tray_.uCallbackMessage = kTrayMessage; tray_.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
+    tray_.uCallbackMessage = kTrayMessage;
+    tray_.hIcon = LoadIconW(instance_, MAKEINTRESOURCEW(IDI_PEEK));
     lstrcpynW(tray_.szTip, L"Peek", static_cast<int>(std::size(tray_.szTip)));
     tray_added_ = Shell_NotifyIconW(NIM_ADD, &tray_) != FALSE;
     if (tray_added_) {
