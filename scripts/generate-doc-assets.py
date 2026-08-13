@@ -123,7 +123,7 @@ def make_demo_gif() -> None:
     ]
 
     frames[0].save(
-        IMAGES / "peek-demo.gif",
+        IMAGES / "peek-demo-hd.gif",
         save_all=True,
         append_images=frames[1:],
         duration=durations,

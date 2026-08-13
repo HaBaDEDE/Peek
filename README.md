@@ -30,7 +30,7 @@
 ![Peek: Ghost, Unlock and Focus](docs/images/peek-overview.png)
 
 <div align="center">
-<img src="docs/images/peek-demo.gif" width="960" alt="Peek feature demo">
+<img src="docs/images/peek-demo-hd.gif" width="960" alt="Peek feature demo">
 </div>
 
 ---
