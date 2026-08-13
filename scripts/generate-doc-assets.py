@@ -65,33 +65,63 @@ def make_overview() -> None:
 def make_demo_gif() -> None:
     width, height = 960, 600
     features = [
-        ("peek-ghost-en.png", "Ghost", "What just flashed past?", "Ctrl + Shift + G"),
-        ("peek-unlock-en.png", "Unlock", "Who is using this file?", "Drop a file or choose one"),
-        ("peek-focus-en.png", "Focus", "What UI is under the pointer?", "Ctrl + Shift + F"),
+        ("peek-demo-ghost.png", "Ghost", "What just flashed past?", "Ctrl + Shift + G"),
+        ("peek-demo-unlock.png", "Unlock", "Who is using this file?", "Drop a file or choose one"),
+        ("peek-demo-focus.png", "Focus", "What Windows UI is under the pointer?", "Ctrl + Shift + F"),
     ]
-    icon = load("peek-icon.png").resize((92, 92), Image.Resampling.LANCZOS)
-    frames: list[Image.Image] = []
-    for screenshot_name, title, question, action in features:
-        frame = Image.new("RGBA", (width, height), (9, 24, 51, 255))
+    icon = load("peek-icon.png").resize((66, 66), Image.Resampling.LANCZOS)
+    stills: list[Image.Image] = []
+    for index, (screenshot_name, title, question, action) in enumerate(features):
+        # Flat colors quantize cleanly in GIF and keep the real window legible.
+        frame = Image.new("RGBA", (width, height), (18, 29, 47, 255))
         draw = ImageDraw.Draw(frame)
-        for x in range(width):
-            t = x / (width - 1)
-            draw.line((x, 0, x, height), fill=(9 + round(12 * t), 24 + round(26 * t), 51 + round(60 * t), 255))
-        frame.alpha_composite(icon, (60, 68))
-        draw.text((60, 193), "Peek", font=font(64, True), fill=(246, 249, 255))
-        draw.text((60, 282), title, font=font(35, True), fill=(56, 189, 248))
-        draw.multiline_text((60, 340), question, font=font(26), fill=(215, 227, 246), spacing=8)
-        draw.rounded_rectangle((60, 448, 430, 508), radius=14, fill=(37, 99, 235))
-        draw.text((245, 478), action, font=font(20, True), fill=(255, 255, 255), anchor="mm")
-        draw.text((60, 548), "Native Win32  ·  Offline  ·  Single EXE", font=font(17), fill=(138, 164, 201))
-        paste_window(frame, load(screenshot_name), (563, 40, 356, 520))
-        frames.append(frame.convert("P", palette=Image.Palette.ADAPTIVE, colors=128))
+        draw.rectangle((0, 0, 456, height), fill=(12, 22, 38, 255))
+        draw.rectangle((456, 0, 460, height), fill=(37, 99, 235, 255))
+
+        frame.alpha_composite(icon, (48, 42))
+        draw.text((130, 46), "Peek", font=font(43, True), fill=(248, 250, 252))
+        draw.text((48, 130), "Three answers. One tiny Windows tool.",
+                  font=font(18), fill=(157, 174, 199))
+
+        draw.text((48, 216), title, font=font(38, True), fill=(96, 165, 250))
+        draw.multiline_text((48, 273), question, font=font(25),
+                            fill=(232, 238, 247), spacing=7)
+        draw.rounded_rectangle((48, 372, 404, 428), radius=8,
+                               fill=(23, 39, 63), outline=(67, 91, 126), width=1)
+        draw.text((226, 400), action, font=font(19, True),
+                  fill=(248, 250, 252), anchor="mm")
+
+        tab_y = 484
+        for tab_index, (_, tab_title, _, _) in enumerate(features):
+            tab_x = 48 + tab_index * 118
+            active = tab_index == index
+            if active:
+                draw.rounded_rectangle((tab_x, tab_y, tab_x + 98, tab_y + 34),
+                                       radius=7, fill=(37, 99, 235))
+            draw.text((tab_x + 49, tab_y + 17), tab_title, font=font(15, active),
+                      fill=(255, 255, 255) if active else (130, 148, 174), anchor="mm")
+
+        draw.text((48, 550), "Native Win32   |   Offline   |   Single EXE",
+                  font=font(16), fill=(130, 148, 174))
+        paste_window(frame, load(screenshot_name), (520, 28, 390, 526))
+        stills.append(frame.convert("RGB"))
+
+    # Clean cuts keep every GIF frame readable, even when GitHub pauses a frame.
+    rgb_frames = stills
+    durations = [1700, 1700, 1900]
+
+    # A shared palette prevents color flicker between frames.
+    palette_source = Image.new("RGB", (width, height * len(stills)))
+    for index, still in enumerate(stills):
+        palette_source.paste(still, (0, index * height))
+    palette = palette_source.quantize(colors=256, method=Image.Quantize.MEDIANCUT)
+    frames = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in rgb_frames]
 
     frames[0].save(
         IMAGES / "peek-demo.gif",
         save_all=True,
         append_images=frames[1:],
-        duration=[1600, 1600, 1800],
+        duration=durations,
         loop=0,
         optimize=True,
         disposal=2,
@@ -168,7 +198,11 @@ def make_social_preview(_background_path: Path | None) -> None:
 def main() -> None:
     parser = ArgumentParser()
     parser.add_argument("--background", type=Path)
+    parser.add_argument("--only", choices=("all", "demo"), default="all")
     args = parser.parse_args()
+    if args.only == "demo":
+        make_demo_gif()
+        return
     make_overview()
     make_demo_gif()
     make_social_preview(args.background)
