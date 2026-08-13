@@ -98,40 +98,70 @@ def make_demo_gif() -> None:
     )
 
 
-def make_social_preview(background_path: Path | None) -> None:
+def make_social_preview(_background_path: Path | None) -> None:
     width, height = 1280, 640
-    if background_path and background_path.exists():
-        background = ImageOps.fit(Image.open(background_path).convert("RGBA"), (width, height),
-                                  Image.Resampling.LANCZOS)
-    else:
-        background = Image.new("RGBA", (width, height), (7, 18, 39, 255))
-        draw = ImageDraw.Draw(background)
-        for x in range(width):
-            t = x / (width - 1)
-            draw.line((x, 0, x, height), fill=(7 + round(8 * t), 18 + round(28 * t), 39 + round(75 * t), 255))
-
-    overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    ImageDraw.Draw(overlay).rectangle((0, 0, 760, height), fill=(4, 14, 31, 118))
-    background.alpha_composite(overlay)
+    background = Image.new("RGBA", (width, height), (245, 247, 250, 255))
     draw = ImageDraw.Draw(background)
-    icon = load("peek-icon.png").resize((102, 102), Image.Resampling.LANCZOS)
-    background.alpha_composite(icon, (72, 64))
-    draw.text((72, 205), "Peek", font=font(82, True), fill=(248, 251, 255))
-    draw.text((72, 311), "See what Windows won't tell you.", font=font(31), fill=(207, 224, 247))
 
-    labels = ["Ghost", "Unlock", "Focus"]
-    x = 72
-    for label in labels:
-        text_box = draw.textbbox((0, 0), label, font=font(22, True))
-        chip_width = text_box[2] - text_box[0] + 40
-        draw.rounded_rectangle((x, 386, x + chip_width, 436), radius=14,
-                               fill=(37, 99, 235, 235), outline=(75, 184, 255, 180))
-        draw.text((x + chip_width // 2, 411), label, font=font(22, True),
-                  fill=(255, 255, 255), anchor="mm")
-        x += chip_width + 16
-    draw.text((72, 528), "Native Win32  ·  Offline  ·  Single EXE  ·  Windows 10/11",
-              font=font(21), fill=(139, 177, 226))
-    paste_window(background, load("peek-focus-en.png"), (890, 54, 330, 532))
+    # Flat colors and real screenshots keep the design consistent with the app.
+    draw.rectangle((0, 0, 354, height), fill=(12, 20, 34, 255))
+    draw.rectangle((354, 0, 362, height), fill=(37, 99, 235, 255))
+
+    icon = load("peek-icon.png").resize((76, 76), Image.Resampling.LANCZOS)
+    background.alpha_composite(icon, (48, 46))
+    draw.text((144, 49), "Peek", font=font(47, True), fill=(248, 250, 252))
+    draw.text((48, 151), "A tiny native Windows utility.",
+              font=font(21), fill=(187, 200, 219))
+
+    features = [
+        ("Ghost", "What just flashed past?"),
+        ("Unlock", "Who is using this file?"),
+        ("Focus", "What UI is under the pointer?"),
+    ]
+    y = 218
+    for title, question in features:
+        draw.rectangle((48, y + 7, 54, y + 37), fill=(59, 130, 246))
+        draw.text((70, y), title, font=font(24, True), fill=(248, 250, 252))
+        draw.text((70, y + 34), question, font=font(16), fill=(157, 174, 199))
+        y += 92
+
+    draw.line((48, 529, 306, 529), fill=(48, 62, 82), width=1)
+    draw.text((48, 554), "Win32  ·  Offline  ·  Portable",
+              font=font(17), fill=(151, 168, 192))
+    draw.text((48, 585), "Windows 10 / 11  ·  x64",
+              font=font(17), fill=(151, 168, 192))
+
+    draw.text((402, 38), "Three questions. One window.",
+              font=font(34, True), fill=(24, 35, 52))
+    draw.text((402, 81), "Native Win32 utility for Windows 10 and 11.",
+              font=font(18), fill=(88, 101, 120))
+
+    cards = [
+        ("peek-ghost-en.png", "Ghost"),
+        ("peek-unlock-en.png", "Unlock"),
+        ("peek-focus-en.png", "Focus"),
+    ]
+    card_y = 124
+    card_width = 268
+    card_height = 462
+    for index, (image_name, title) in enumerate(cards):
+        x = 398 + index * 286
+        draw.rounded_rectangle(
+            (x, card_y, x + card_width, card_y + card_height),
+            radius=12,
+            fill=(255, 255, 255),
+            outline=(210, 216, 225),
+            width=1,
+        )
+        draw.text((x + 18, card_y + 17), title,
+                  font=font(21, True), fill=(37, 99, 235))
+        screenshot = load(image_name)
+        fitted = ImageOps.contain(screenshot, (236, 382), Image.Resampling.LANCZOS)
+        background.alpha_composite(
+            fitted,
+            (x + (card_width - fitted.width) // 2, card_y + 61),
+        )
+
     background.convert("RGB").save(IMAGES / "social-preview.png", optimize=True)
 
 
