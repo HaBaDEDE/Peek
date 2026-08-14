@@ -17,6 +17,8 @@
 [![License: MIT](https://img.shields.io/github/license/HaBaDEDE/Peek?style=flat-square)](LICENSE)
 ![Windows 10/11](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4?style=flat-square&logo=windows)
 
+**[官方网站 / Official website](https://habadede.github.io/Peek/)**
+
 [简体中文](#readme-zh) · [English](#readme-en)
 
 **[下载最新版本](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe) · [Download latest release](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe)**
