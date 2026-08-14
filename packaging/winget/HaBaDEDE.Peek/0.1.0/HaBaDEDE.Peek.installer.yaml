@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.12.0.schema.json
+
+PackageIdentifier: HaBaDEDE.Peek
+PackageVersion: 0.1.0
+InstallerType: portable
+Scope: user
+UpgradeBehavior: install
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/HaBaDEDE/Peek/releases/download/v0.1.0/Peek.exe
+    InstallerSha256: 9A93D452897B121307490FD905BCDBCE842096041A74C49B449E2AB1754BF783
+    Commands:
+      - Peek
+ManifestType: installer
+ManifestVersion: 1.12.0
