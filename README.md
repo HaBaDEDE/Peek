@@ -61,6 +61,13 @@ Peek 是一个轻量、快速的 Windows 系统观察工具。它不是任务管
 
 **[直接下载 Peek.exe](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe)**
 
+也可以通过 Scoop 自托管 bucket 安装和更新：
+
+```powershell
+scoop bucket add peek https://github.com/HaBaDEDE/Peek
+scoop install peek
+```
+
 校验文件：[SHA256SUMS.txt](https://github.com/HaBaDEDE/Peek/releases/latest/download/SHA256SUMS.txt)
 
 仓库中的 [dist/Peek.exe](dist/Peek.exe) 与当前源码版本对应，也可以直接下载运行。
@@ -256,6 +263,13 @@ Peek is a small, fast Windows observation utility. It is not a task manager and 
 Download the official Windows x64 build from [GitHub Releases](https://github.com/HaBaDEDE/Peek/releases/latest):
 
 **[Download Peek.exe](https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe)**
+
+You can also install and update Peek through its self-hosted Scoop bucket:
+
+```powershell
+scoop bucket add peek https://github.com/HaBaDEDE/Peek
+scoop install peek
+```
 
 Checksum file: [SHA256SUMS.txt](https://github.com/HaBaDEDE/Peek/releases/latest/download/SHA256SUMS.txt)
 
