@@ -10,6 +10,18 @@ Run all commands from a normal, unelevated PowerShell window first. Repeat prote
 
 The script launches Peek, checks that it stays alive, creates a short PowerShell process, and creates a temporary file lock for the manual Unlock step.
 
+## Scoop package smoke test
+
+The self-hosted `bucket/peek.json` manifest was tested on 2026-08-14 in an isolated Scoop environment:
+
+- Added `https://github.com/HaBaDEDE/Peek` as the `peek` bucket.
+- Installed `peek` version `0.1.0` from its versioned GitHub Release URL.
+- Verified Scoop's SHA-256 check and the installed executable hash.
+- Launched the installed executable and confirmed that the process remained alive.
+- Uninstalled the package and verified removal of the shortcut and current-version link.
+
+The isolated Scoop environment and test shortcut were removed after the test.
+
 ## Manual acceptance checklist
 
 1. **Tray** — launch Peek, close the main window, and verify the tray icon remains. Double-click it and verify the window returns.
