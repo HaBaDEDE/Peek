@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://habadede.github.io/Peek/sitemap.xml

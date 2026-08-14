@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1b2f">
+  <meta name="description" content="Peek is a tiny native Windows utility that identifies transient processes, file locks, and UI elements.">
+  <meta property="og:title" content="Peek — Three answers. One tiny Windows tool.">
+  <meta property="og:description" content="Ghost · Unlock · Focus. Native Win32, offline, portable, bilingual.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://habadede.github.io/Peek/">
+  <meta property="og:image" content="https://habadede.github.io/Peek/images/social-preview.png">
+  <title>Peek — Tiny native Windows utility</title>
+  <link rel="icon" href="images/peek-icon.png">
+  <link rel="stylesheet" href="site.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Peek",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows 10, Windows 11",
+      "softwareVersion": "0.1.0",
+      "isAccessibleForFree": true,
+      "license": "https://opensource.org/license/mit",
+      "downloadUrl": "https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe",
+      "codeRepository": "https://github.com/HaBaDEDE/Peek"
+    }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Peek home">
+      <img src="images/peek-icon.png" width="36" height="36" alt="">
+      <span>Peek</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#features" data-en="Features" data-zh="功能">Features</a>
+      <a href="#privacy" data-en="Privacy" data-zh="隐私">Privacy</a>
+      <a href="https://github.com/HaBaDEDE/Peek" data-en="Source" data-zh="源代码">Source</a>
+      <button class="language" id="language" type="button" aria-label="Switch language">中文</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-en="NATIVE WINDOWS UTILITY" data-zh="原生 WINDOWS 工具">NATIVE WINDOWS UTILITY</p>
+        <h1 data-en="Three answers. One tiny Windows tool." data-zh="三个问题，一个极小的 Windows 工具。">Three answers. One tiny Windows tool.</h1>
+        <p class="lead" data-en="Find what flashed past, who locked a file, and which Windows UI is under the pointer." data-zh="找出刚才一闪而过的程序、占用文件的进程，以及鼠标下方的 Windows 控件。">Find what flashed past, who locked a file, and which Windows UI is under the pointer.</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe" data-en="Download Peek.exe" data-zh="下载 Peek.exe">Download Peek.exe</a>
+          <a class="button secondary" href="https://github.com/HaBaDEDE/Peek/releases/latest" data-en="Release notes" data-zh="版本说明">Release notes</a>
+        </div>
+        <p class="requirements" data-en="Windows 10/11 · x64 · Portable · No account · No telemetry" data-zh="Windows 10/11 · x64 · 免安装 · 无账户 · 无遥测">Windows 10/11 · x64 · Portable · No account · No telemetry</p>
+      </div>
+      <div class="hero-visual">
+        <img src="images/peek-demo-ghost-hd.png" alt="Peek Ghost showing recent process events">
+      </div>
+    </section>
+
+    <section class="demo" aria-labelledby="demo-title">
+      <div>
+        <p class="section-label" data-en="REAL WORKFLOW" data-zh="真实使用流程">REAL WORKFLOW</p>
+        <h2 id="demo-title" data-en="The answer is one hotkey away." data-zh="按一次快捷键，马上得到答案。">The answer is one hotkey away.</h2>
+      </div>
+      <video controls muted loop playsinline preload="metadata" poster="images/peek-demo-ghost-hd.png">
+        <source src="media/peek-ghost-demo.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <section id="features" class="features" aria-labelledby="features-title">
+      <div class="section-heading">
+        <p class="section-label" data-en="THREE FOCUSED TOOLS" data-zh="三个专注功能">THREE FOCUSED TOOLS</p>
+        <h2 id="features-title" data-en="Only what you need, when you need it." data-zh="需要的时候，只给你需要的信息。">Only what you need, when you need it.</h2>
+      </div>
+
+      <article class="feature-card">
+        <div class="feature-copy">
+          <span class="number">01</span>
+          <h3>Ghost</h3>
+          <p class="question" data-en="What just flashed past?" data-zh="刚才闪过去的是什么？">What just flashed past?</p>
+          <p data-en="Keeps the latest short-lived process and top-level window events in memory, including lifetime, path, command line, and parent process when Windows makes them available." data-zh="在内存中保留最近的短生命周期进程与顶层窗口事件，并尽量显示存活时间、路径、命令行和父进程。">Keeps the latest short-lived process and top-level window events in memory, including lifetime, path, command line, and parent process when Windows makes them available.</p>
+          <kbd>Ctrl + Shift + G</kbd>
+        </div>
+        <img src="images/peek-demo-ghost-hd.png" alt="Ghost feature">
+      </article>
+
+      <article class="feature-card reverse">
+        <div class="feature-copy">
+          <span class="number">02</span>
+          <h3>Unlock</h3>
+          <p class="question" data-en="Who is using this file?" data-zh="谁正在占用这个文件？">Who is using this file?</p>
+          <p data-en="Drop a file or choose one. Peek uses Windows Restart Manager to identify likely owners and lets you reveal the executable or end the process after confirmation." data-zh="拖入或选择一个文件。Peek 使用 Windows Restart Manager 查找可能的占用进程，并可定位程序或在确认后结束进程。">Drop a file or choose one. Peek uses Windows Restart Manager to identify likely owners and lets you reveal the executable or end the process after confirmation.</p>
+        </div>
+        <img src="images/peek-demo-unlock-hd.png" alt="Unlock feature">
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-copy">
+          <span class="number">03</span>
+          <h3>Focus</h3>
+          <p class="question" data-en="What Windows UI is under the pointer?" data-zh="鼠标下面的 Windows UI 是什么？">What Windows UI is under the pointer?</p>
+          <p data-en="Highlight a window or control and read its HWND, process, class, title, rectangle, and available UI Automation properties." data-zh="高亮窗口或控件，并读取 HWND、所属进程、窗口类、标题、区域及可用的 UI Automation 属性。">Highlight a window or control and read its HWND, process, class, title, rectangle, and available UI Automation properties.</p>
+          <kbd>Ctrl + Shift + F</kbd>
+        </div>
+        <img src="images/peek-demo-focus-hd.png" alt="Focus feature">
+      </article>
+    </section>
+
+    <section id="privacy" class="principles" aria-labelledby="privacy-title">
+      <div>
+        <p class="section-label" data-en="SMALL BY DESIGN" data-zh="从设计上保持极小">SMALL BY DESIGN</p>
+        <h2 id="privacy-title" data-en="Native, offline, and understandable." data-zh="原生、离线、简单明了。">Native, offline, and understandable.</h2>
+      </div>
+      <ul>
+        <li><strong data-en="Single EXE" data-zh="单文件 EXE">Single EXE</strong><span data-en="Run it directly. No installer or separate runtime." data-zh="直接运行，不需要安装器或额外运行库。">Run it directly. No installer or separate runtime.</span></li>
+        <li><strong data-en="No network" data-zh="不联网">No network</strong><span data-en="No account, cloud sync, online database, or telemetry." data-zh="没有账户、云同步、在线数据库或遥测。">No account, cloud sync, online database, or telemetry.</span></li>
+        <li><strong data-en="Native Win32" data-zh="原生 Win32">Native Win32</strong><span data-en="C++20 and Windows system APIs. No Electron or WebView." data-zh="使用 C++20 与 Windows 系统 API，不使用 Electron 或 WebView。">C++20 and Windows system APIs. No Electron or WebView.</span></li>
+        <li><strong data-en="Open source" data-zh="开放源代码">Open source</strong><span data-en="MIT licensed, with source and build instructions on GitHub." data-zh="采用 MIT 许可证，源代码与构建说明均公开在 GitHub。">MIT licensed, with source and build instructions on GitHub.</span></li>
+      </ul>
+    </section>
+
+    <section class="download">
+      <img src="images/peek-icon.png" width="88" height="88" alt="Peek icon">
+      <div>
+        <h2 data-en="Keep the answer one action away." data-zh="让答案始终只差一次操作。">Keep the answer one action away.</h2>
+        <p data-en="Download the portable Windows x64 release." data-zh="下载免安装的 Windows x64 版本。">Download the portable Windows x64 release.</p>
+      </div>
+      <a class="button primary" href="https://github.com/HaBaDEDE/Peek/releases/latest/download/Peek.exe" data-en="Download" data-zh="下载">Download</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>Peek · MIT License</span>
+    <span data-en="No tracking on this site." data-zh="本网站不使用访问统计或追踪。">No tracking on this site.</span>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>
